@@ -1,0 +1,16 @@
+<ion-footer *ngIf="isMobile">
+  <ion-toolbar class="custom-footer">
+    <div class="footer-container">
+      <div class="footer-button">
+        <ion-button fill="clear" [routerLink]="['/home']">
+          <ion-icon slot="icon-only" name="checkmark-done-outline"></ion-icon>
+        </ion-button>
+      </div>
+      <div class="footer-button">
+        <ion-button fill="clear" [routerLink]="['/plans']">
+          <ion-icon slot="icon-only" name="calendar-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>

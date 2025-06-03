@@ -1,0 +1,65 @@
+<app-header></app-header>
+
+<ion-content class="ion-padding">
+  <div class="background-overlay"></div>
+  
+  <div class="form-container">
+    <h2 class="form-title">Nueva Tarea</h2>
+
+    <div class="input-container">
+      <label class="input-label">Título</label>
+      <ion-item class="rounded-item" fill="outline">
+        <ion-input [(ngModel)]="task.title" required></ion-input>
+      </ion-item>
+    </div>
+
+    <div class="input-container">
+      <label class="input-label">Descripción</label>
+      <ion-item class="rounded-item" fill="outline">
+        <ion-textarea [(ngModel)]="task.description"></ion-textarea>
+      </ion-item>
+    </div>
+
+    <div class="input-container">
+      <label class="input-label">Fecha límite</label>
+      <ion-item class="rounded-item" fill="outline">
+        <ion-datetime 
+          presentation="date" 
+          [(ngModel)]="task.dueDate"
+          class="custom-datetime">
+        </ion-datetime>
+      </ion-item>
+    </div>
+
+    <div class="input-container">
+      <label class="input-label">Prioridad</label>
+      <ion-item class="rounded-item" fill="outline">
+        <ion-select [(ngModel)]="task.priority" interface="action-sheet">
+          <ion-select-option value="alta">Alta</ion-select-option>
+          <ion-select-option value="media">Media</ion-select-option>
+          <ion-select-option value="baja">Baja</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+    <div class="input-container">
+      <label class="input-label">Asignar a Plan</label>
+      <ion-item class="rounded-item" fill="outline">
+        <ion-select [(ngModel)]="task.planId" interface="action-sheet">
+          <ion-select-option [value]="null">Ningún plan</ion-select-option>
+          <ion-select-option *ngFor="let plan of userPlans" [value]="plan.id">
+            {{ plan.title }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <ion-button 
+      class="custom-button login-button" 
+      expand="block" 
+      (click)="createTask()">
+      Crear Tarea
+    </ion-button>
+  </div>
+</ion-content>
+
+<app-footer></app-footer>

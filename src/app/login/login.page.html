@@ -1,0 +1,85 @@
+
+
+<ion-content class="ion-padding">
+
+  <!-- Icono y título -->
+  <div class="header-container">
+    <ion-icon name="person-circle-outline" class="user-icon"></ion-icon>
+    <h2>Entra en tu cuenta</h2>
+  </div>
+
+  <!-- Formulario de login -->
+  <form (ngSubmit)="login()" #loginForm="ngForm">
+    <!-- Email -->
+    <div class="input-container">
+      <label for="email" class="input-label">Email</label>
+      <ion-item class="rounded-item" fill="outline">
+        <ion-input 
+          id="email" 
+          type="email" 
+          [(ngModel)]="email" 
+          name="email" 
+          required 
+          email 
+          #emailInput="ngModel"
+          [class.invalid]="emailInput.invalid && emailInput.touched"
+        ></ion-input>
+      </ion-item>
+      <ion-note *ngIf="emailInput.invalid && emailInput.touched" color="danger">
+        Email no válido
+      </ion-note>
+    </div>
+
+    <!-- Contraseña -->
+    <div class="input-container">
+      <label for="password" class="input-label">Contraseña</label>
+      <ion-item class="rounded-item" fill="outline">
+        <ion-input 
+          id="password" 
+          [type]="isPasswordVisible ? 'text' : 'password'" 
+          [(ngModel)]="password" 
+          name="password" 
+          required 
+          minlength="8" 
+          #passwordInput="ngModel"
+          [class.invalid]="passwordInput.invalid && passwordInput.touched"
+        ></ion-input>
+      </ion-item>
+      <ion-note *ngIf="passwordInput.invalid && passwordInput.touched" color="danger">
+        Introduce al menos 8 caracteres
+      </ion-note>
+    </div>
+
+    <!-- contraseña olvidada -->
+    <div class="text-link">
+      <a (click)="forgotPassword()" class="forgot-password-link">He olvidado mi contraseña</a>
+    </div>
+
+    <!-- Botón de iniciar sesión -->
+    <ion-button 
+      class="custom-button login-button" 
+      type="submit" 
+      expand="block" 
+      [disabled]="loginForm.invalid || isLoading">
+    <ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
+    <span *ngIf="!isLoading">Iniciar sesión</span>
+</ion-button>
+
+  </form>
+
+  <!-- botón de crear cuenta -->
+  <div class="registro-container">
+    <p>¿Aún no tienes cuenta?</p>
+    <ion-button 
+      class="btn-secondary" 
+      (click)="goToRegister()" 
+      [disabled]="isLoading"
+      shape="round"
+      expand="block"
+      fill="solid"
+    >
+      Crear cuenta
+    </ion-button>
+  </div>
+
+</ion-content>

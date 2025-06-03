@@ -1,0 +1,119 @@
+<ion-content class="ion-padding">
+  <div class="header-container">
+    <ion-icon name="person-circle-outline" class="user-icon"></ion-icon>
+    <h2>Crea tu cuenta</h2>
+  </div>
+
+  <!-- Formulario de registro -->
+  <form (ngSubmit)="register()" #registerForm="ngForm">
+
+    <!-- Nombre -->
+    <div class="input-container">
+      <label for="username" class="input-label">Nombre</label>
+      <ion-item class="rounded-item" fill="outline">
+        <ion-input
+          id="username"
+          type="text"
+          name="username"
+          [(ngModel)]="username"
+          required
+          #usernameInput="ngModel"
+          [class.invalid]="usernameInput.invalid && usernameInput.touched"
+        ></ion-input>
+      </ion-item>
+      <ion-note *ngIf="usernameInput.invalid && usernameInput.touched" color="danger">
+        Introduce tu nombre
+      </ion-note>
+    </div>
+
+    <!-- Email -->
+    <div class="input-container">
+      <label for="email" class="input-label">Correo electrónico</label>
+      <ion-item class="rounded-item" fill="outline">
+        <ion-input
+          id="email"
+          type="email"
+          name="email"
+          [(ngModel)]="email"
+          required
+          email
+          #emailInput="ngModel"
+          [class.invalid]="emailInput.invalid && emailInput.touched"
+        ></ion-input>
+      </ion-item>
+      <ion-note *ngIf="emailInput.invalid && emailInput.touched" color="danger">
+        Email no válido
+      </ion-note>
+    </div>
+
+    <!-- Contraseña -->
+    <div class="input-container">
+      <label for="password" class="input-label">Contraseña</label>
+      <ion-item class="rounded-item" fill="outline">
+        <ion-input
+          id="password"
+          [type]="passwordVisibility.password1 ? 'text' : 'password'"
+          name="password"
+          [(ngModel)]="password"
+          required
+          minlength="8"
+          #passwordInput="ngModel"
+          [class.invalid]="passwordInput.invalid && passwordInput.touched"
+        ></ion-input>
+
+        
+      </ion-item>
+      <ion-note *ngIf="passwordInput.invalid && passwordInput.touched" color="danger">
+        Incluye al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial.
+      </ion-note>
+    </div>
+
+    <!-- campo para confirmar contraseña -->
+    <div class="input-container">
+      <label for="confirmPassword" class="input-label">Confirmar contraseña</label>
+      <ion-item class="rounded-item" fill="outline">
+        <ion-input
+          id="confirmPassword"
+          [type]="passwordVisibility.password2 ? 'text' : 'password'"
+          name="confirmPassword"
+          [(ngModel)]="confirmPassword"
+          required
+          minlength="8"
+          #confirmPasswordInput="ngModel"
+          [class.invalid]="confirmPasswordInput.invalid && confirmPasswordInput.touched"
+        ></ion-input>
+
+        
+      </ion-item>
+      <ion-note *ngIf="confirmPasswordInput.invalid && confirmPasswordInput.touched" color="danger">
+        Repite la contraseña
+      </ion-note>
+    </div>
+
+    <!-- Botón de crear cuenta -->
+    <ion-button
+      class="custom-button login-button"
+      type="submit"
+      expand="block"
+      [disabled]="registerForm.invalid"
+    >
+      Crear cuenta
+    </ion-button>
+
+  </form>
+
+  <!-- Enlace al login -->
+  <div class="registro-container">
+    <p>¿Ya tienes cuenta?</p>
+    <ion-button
+      class="btn-secondary"
+      (click)="goBack()"
+      shape="round"
+      expand="block"
+      fill="solid"
+    >
+      Iniciar sesión
+    </ion-button>
+  </div>
+
+</ion-content>

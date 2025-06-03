@@ -1,0 +1,70 @@
+.ion-padding {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background-image: url('/assets/bg/planit-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  --background: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  padding-top: 24px;
+}
+
+.background-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.3);
+  z-index: 1;
+}
+
+ion-list-header {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #0baeff;
+  margin-bottom: 12px;
+  padding-left: 16px;
+}
+
+ion-list {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  z-index: 2;
+
+  ion-item {
+    --background: rgba(255, 255, 255, 0.7);
+    --border-radius: 12px;
+    margin: 10px 16px;
+    border-radius: 12px;
+    --padding-start: 16px;
+
+    ion-icon {
+      color: #0baeff;
+      font-size: 24px;
+    }
+
+    ion-label {
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+    }
+  }
+}
+
+ion-item:last-of-type {
+  ion-icon {
+    color: #e74c3c;
+  }
+
+  ion-label {
+    color: #e74c3c;
+  }
+}

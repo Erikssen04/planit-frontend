@@ -1,0 +1,81 @@
+.welcome-content {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background-image: url('/assets/bg/planit-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  --background: none; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.background-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.3);
+  z-index: 1;
+}
+
+.welcome-container {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 90%;
+  margin: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.app-logo {
+  width: 140px;
+  margin-bottom: 80px;
+  margin-top: 36px;
+}
+
+
+
+.welcome-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0a0a0a;
+  margin-bottom: 32px;
+}
+
+.illustration-image {
+  width: 140px;
+}
+
+.welcome-text {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 80px;
+  line-height: 1.4;
+  max-width: 360px;
+}
+
+.login-button {
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+  background-color: #0baeff;
+  color: white;
+  font-weight: 500;
+  font-size: 14px;
+  height: 42px;
+  border-radius: 20px;
+  text-transform: none;
+  --background: #0baeff;
+  --background-hover: #0099dd;
+  --background-activated: #007acc;
+  --box-shadow: none;
+  box-shadow: none;
+}

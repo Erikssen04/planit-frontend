@@ -1,0 +1,50 @@
+<app-header></app-header>
+
+<ion-content class="ion-padding">
+  <div class="background-overlay"></div>
+  
+  <div class="form-container">
+    <h2 class="form-title">Editar Plan</h2>
+
+    <div class="input-container">
+      <label class="input-label">Título</label>
+      <ion-item class="rounded-item" fill="outline">
+        <ion-input [(ngModel)]="plan.title" required></ion-input>
+      </ion-item>
+    </div>
+
+    <div class="input-container">
+      <label class="input-label">Descripción</label>
+      <ion-item class="rounded-item" fill="outline">
+        <ion-textarea [(ngModel)]="plan.description"></ion-textarea>
+      </ion-item>
+    </div>
+
+    <div class="input-container">
+      <label class="input-label">Fecha límite</label>
+      <ion-item class="rounded-item" fill="outline">
+        <ion-datetime 
+          presentation="date" 
+          [(ngModel)]="plan.dueDate"
+          class="custom-datetime">
+        </ion-datetime>
+      </ion-item>
+    </div>
+
+    <div class="input-container">
+      <ion-item class="rounded-item" fill="outline">
+        <ion-label class="checkbox-label">Completado</ion-label>
+        <ion-checkbox [(ngModel)]="plan.completed" slot="end"></ion-checkbox>
+      </ion-item>
+    </div>
+
+    <ion-button 
+      class="custom-button login-button" 
+      expand="block" 
+      (click)="updatePlan()">
+      Guardar Cambios
+    </ion-button>
+  </div>
+</ion-content>
+
+<app-footer></app-footer>

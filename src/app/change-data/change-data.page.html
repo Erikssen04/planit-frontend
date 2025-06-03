@@ -1,0 +1,130 @@
+<app-header></app-header>
+
+<ion-content class="ion-padding">
+  <!-- Icono y título -->
+  <div class="header-container">
+    <ion-icon name="person-circle-outline" class="user-icon"></ion-icon>
+    <h2>Cambiar datos</h2>
+  </div>
+
+  <!-- Formulario de cambio de datos -->
+  <form (ngSubmit)="updateData()" #changeDataForm="ngForm">
+    
+    <!-- Nombre de usuario -->
+    <div class="input-container">
+      <label for="username" class="input-label">Nombre de usuario</label>
+      <ion-item class="rounded-item" fill="outline">
+        <ion-input
+          id="username"
+          type="text"
+          name="username"
+          [(ngModel)]="username"
+          required
+          #usernameInput="ngModel"
+          [class.invalid]="usernameInput.invalid && usernameInput.touched"
+        ></ion-input>
+      </ion-item>
+      <ion-note *ngIf="usernameInput.invalid && usernameInput.touched" color="danger">
+        Introduce tu nombre de usuario
+      </ion-note>
+    </div>
+
+    <!-- Contraseña actual -->
+    <div class="input-container">
+      <label for="currentPassword" class="input-label">Contraseña actual</label>
+      <ion-item class="rounded-item" fill="outline">
+        <ion-input
+          id="currentPassword"
+          [type]="showCurrentPassword ? 'text' : 'password'"
+          name="currentPassword"
+          [(ngModel)]="currentPassword"
+          required
+          #currentPasswordInput="ngModel"
+          [class.invalid]="currentPasswordInput.invalid && currentPasswordInput.touched"
+        ></ion-input>
+        <ion-icon 
+          slot="end" 
+          [name]="showCurrentPassword ? 'eye-off-outline' : 'eye-outline'" 
+          class="password-icon"
+          (click)="showCurrentPassword = !showCurrentPassword"
+        ></ion-icon>
+      </ion-item>
+      <ion-note *ngIf="currentPasswordInput.invalid && currentPasswordInput.touched" color="danger">
+        Introduce tu contraseña actual
+      </ion-note>
+    </div>
+
+    <!-- Nueva contraseña -->
+    <div class="input-container">
+      <label for="newPassword" class="input-label">Nueva contraseña</label>
+      <ion-item class="rounded-item" fill="outline">
+        <ion-input
+          id="newPassword"
+          [type]="showNewPassword ? 'text' : 'password'"
+          name="newPassword"
+          [(ngModel)]="newPassword"
+          required
+          minlength="8"
+          #newPasswordInput="ngModel"
+          [class.invalid]="newPasswordInput.invalid && newPasswordInput.touched"
+        ></ion-input>
+        <ion-icon 
+          slot="end" 
+          [name]="showNewPassword ? 'eye-off-outline' : 'eye-outline'" 
+          class="password-icon"
+          (click)="showNewPassword = !showNewPassword"
+        ></ion-icon>
+      </ion-item>
+      <ion-note *ngIf="newPasswordInput.invalid && newPasswordInput.touched" color="danger">
+        Incluye al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial.
+      </ion-note>
+    </div>
+
+    <!-- Repetir nueva contraseña -->
+    <div class="input-container">
+      <label for="confirmNewPassword" class="input-label">Confirmar nueva contraseña</label>
+      <ion-item class="rounded-item" fill="outline">
+        <ion-input
+          id="confirmNewPassword"
+          [type]="showConfirmNewPassword ? 'text' : 'password'"
+          name="confirmNewPassword"
+          [(ngModel)]="confirmNewPassword"
+          required
+          minlength="8"
+          #confirmNewPasswordInput="ngModel"
+          [class.invalid]="confirmNewPasswordInput.invalid && confirmNewPasswordInput.touched"
+        ></ion-input>
+        <ion-icon 
+          slot="end" 
+          [name]="showConfirmNewPassword ? 'eye-off-outline' : 'eye-outline'" 
+          class="password-icon"
+          (click)="showConfirmNewPassword = !showConfirmNewPassword"
+        ></ion-icon>
+      </ion-item>
+      <ion-note *ngIf="(confirmNewPasswordInput.invalid || newPassword !== confirmNewPassword) && confirmNewPasswordInput.touched" color="danger">
+        Las contraseñas no coinciden
+      </ion-note>
+    </div>
+
+    <!-- Botón actualizar datos -->
+    <ion-button
+      class="custom-button"
+      type="submit"
+      expand="block"
+      [disabled]="changeDataForm.invalid || newPassword !== confirmNewPassword"
+    >
+      Actualizar datos
+    </ion-button>
+  </form>
+
+  <!-- Botón eliminar cuenta -->
+  <ion-button
+    class="delete-button"
+    expand="block"
+    (click)="confirmDeleteAccount()"
+  >
+    Eliminar cuenta
+  </ion-button>
+</ion-content>
+
+<app-footer></app-footer>

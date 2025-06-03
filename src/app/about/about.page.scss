@@ -1,0 +1,47 @@
+.ion-padding {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background-image: url('/assets/bg/planit-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  --background: none; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.about-container {
+  text-align: center;
+  padding: 24px;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.about-logo {
+  width: 160px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.about-text {
+  h2 {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+    font-weight: 600;
+    color: #0baeff;
+  }
+
+  p {
+    text-align: justify;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #333;
+    margin-bottom: 16px;
+  }
+}

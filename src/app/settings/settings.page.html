@@ -1,0 +1,29 @@
+<app-header></app-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Configuración</ion-label>
+    </ion-list-header>
+
+    <!-- información -->
+    <ion-item button [routerLink]="['/about']">
+      <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+      <ion-label>Acerca de</ion-label>
+    </ion-item>
+
+    <!-- cambio de contraseña -->
+    <ion-item button [routerLink]="['/change-data']">
+      <ion-icon slot="start" name="key-outline"></ion-icon>
+      <ion-label>Cambiar datos</ion-label>
+    </ion-item>
+
+    <!-- cerrar sesión -->
+    <ion-item button (click)="logout()">
+      <ion-icon slot="start" name="log-out-outline"></ion-icon>
+      <ion-label>Cerrar sesión</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<app-footer></app-footer>

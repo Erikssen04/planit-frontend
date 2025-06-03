@@ -1,0 +1,92 @@
+<app-header></app-header>
+
+<ion-content class="ion-padding">
+  <div class="home-layout">
+    <!-- Panel izquierdo: filtros -->
+    <div class="controls-section">
+      <h1>Mis Tareas</h1>
+
+      <ion-segment [(ngModel)]="selectedFilter" (ionChange)="applyFilters()">
+        <ion-segment-button value="all">
+          <ion-label>Todas</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="pending">
+          <ion-label>Pendientes</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="completed">
+          <ion-label>Completadas</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+
+      <ion-searchbar
+        [(ngModel)]="searchQuery"
+        (ionInput)="applyFilters()"
+        placeholder="Buscar por título...">
+      </ion-searchbar>
+
+      <ion-item class="date-filter">
+        <ion-label slot="start">Filtrar por fecha</ion-label>
+        <ion-select [(ngModel)]="selectedDateFilter" (ionChange)="applyFilters()" slot="end">
+          <ion-select-option value="all">Todas las fechas</ion-select-option>
+          <ion-select-option value="today">Hoy</ion-select-option>
+          <ion-select-option value="tomorrow">Mañana</ion-select-option>
+          <ion-select-option value="week">Esta semana</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <!-- Panel derecho: lista de tareas -->
+    <div class="task-list-section">
+      <ion-list>
+        <!-- Estado vacío -->
+        <div *ngIf="filteredTasks.length === 0" class="empty-state">
+          <ion-icon name="checkmark-done-outline" class="empty-icon"></ion-icon>
+          <h3>¡Todo bajo control!</h3>
+          <p>No hay tareas que coincidan con los filtros</p>
+        </div>
+
+        <!-- Tareas -->
+        <ion-item *ngFor="let task of filteredTasks" (click)="goToUpdateTask(task.id!)">
+          <ion-checkbox
+            slot="start"
+            [checked]="task.completed"
+            (click)="$event.stopPropagation(); toggleTask(task.id!)">
+          </ion-checkbox>
+
+          <ion-label [class.completed]="task.completed">
+            <h2>{{ task.title }}</h2>
+            <p *ngIf="task.description">{{ task.description }}</p>
+            <p *ngIf="task.dueDate">
+              <ion-icon name="calendar-outline"></ion-icon>
+              {{ task.dueDate | date:'dd/MM/yyyy' }}
+            </p>
+            <ion-badge [color]="getPriorityColor(task.priority)">
+              {{ task.priority }}
+            </ion-badge>
+            <p *ngIf="task.planId">
+              <ion-icon name="list-outline" color="primary"></ion-icon>
+              Plan: {{ getPlanName(task.planId) }}
+            </p>
+          </ion-label>
+
+          <ion-button
+            fill="clear"
+            color="danger"
+            slot="end"
+            (click)="$event.stopPropagation(); deleteTask(task.id!)">
+            <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+
+  <!-- Botón flotante -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="custom-fab">
+    <ion-fab-button (click)="goToCreateTask()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<app-footer></app-footer>
