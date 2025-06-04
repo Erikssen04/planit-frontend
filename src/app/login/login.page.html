@@ -1,5 +1,3 @@
-
-
 <ion-content class="ion-padding">
 
   <!-- Icono y título -->
@@ -44,6 +42,11 @@
           #passwordInput="ngModel"
           [class.invalid]="passwordInput.invalid && passwordInput.touched"
         ></ion-input>
+        
+        <!-- Botón para mostrar/ocultar contraseña -->
+        <ion-button fill="clear" slot="end" (click)="isPasswordVisible = !isPasswordVisible">
+          <ion-icon [name]="isPasswordVisible ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+        </ion-button>
       </ion-item>
       <ion-note *ngIf="passwordInput.invalid && passwordInput.touched" color="danger">
         Introduce al menos 8 caracteres
@@ -61,10 +64,9 @@
       type="submit" 
       expand="block" 
       [disabled]="loginForm.invalid || isLoading">
-    <ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
-    <span *ngIf="!isLoading">Iniciar sesión</span>
-</ion-button>
-
+      <ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
+      <span *ngIf="!isLoading">Iniciar sesión</span>
+    </ion-button>
   </form>
 
   <!-- botón de crear cuenta -->

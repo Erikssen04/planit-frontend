@@ -4,6 +4,7 @@ import { TaskService } from 'src/app/services/task.service';
 import { Task } from 'src/app/models/task.model';
 import { Plan } from '../models/plan.model';
 import { PlanService } from '../services/plan.service';
+import { TaskValidationService } from '../services/task-validation.service';
 
 @Component({
   selector: 'app-create-task',
@@ -22,11 +23,13 @@ export class CreateTaskPage {
     planId: null
   };
   userPlans: Plan[] = [];
+  validationErrors: { title?: string, priority?: string } = {};
 
   constructor(
     private taskService: TaskService,
     private planService: PlanService,
     private router: Router,
+    private validationService: TaskValidationService
   ) {}
 
   ngOnInit() {
@@ -43,15 +46,21 @@ export class CreateTaskPage {
 
   // Crear tarea y refrescarla al entrar a home
   createTask() {
-    const taskToCreate: Task = {
-      ...this.task,
-      createdAt: new Date().toISOString()
-    };
-    this.taskService.createTask(this.task).subscribe({
-      next: () => this.router.navigate(['/home'], {
-        state: { refresh: true }
-    }),
-      error: (err) => console.error('Error creando tarea', err),
-    });
+    // Validar los datos
+    const validation = this.validationService.validateTask(this.task);
+    this.validationErrors = validation.errors;
+
+    if (validation.valid) {
+      const taskToCreate: Task = {
+        ...this.task,
+        createdAt: new Date().toISOString()
+      };
+      this.taskService.createTask(this.task).subscribe({
+        next: () => this.router.navigate(['/home'], {
+          state: { refresh: true }
+        }),
+        error: (err) => console.error('Error creando tarea', err),
+      });
+    }
   }
 }

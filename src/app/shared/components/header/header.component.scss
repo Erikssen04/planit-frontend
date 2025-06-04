@@ -1,13 +1,19 @@
 .safe-header {
   padding-top: var(--ion-safe-area-top);
   background: #0baeff !important;
+  display: flex; /* Añadido para centrado vertical */
+  align-items: center; /* Centra verticalmente el contenido */
+  min-height: calc(60px + var(--ion-safe-area-top)); /* Altura mínima */
 }
 
 .custom-header {
   --background: #0baeff !important;
   height: 60px;
   position: relative;
-  margin-top: var(--status-bar-height, 5px);
+  width: 100%; /* Ocupa todo el ancho */
+  display: flex; /* Añadido para centrado vertical */
+  align-items: center; /* Centra verticalmente el contenido */
+  margin-top: 0; /* Eliminado el margen superior */
 
   .header-logo-container, .logo-section {
     display: flex;
@@ -16,7 +22,7 @@
     height: 100%;
     
     img {
-      height: 40px;
+      height: 35px;
       max-height: 100%;
     }
   }
@@ -31,16 +37,17 @@
     
     .header-button {
       position: absolute;
-      top: 0;
-      bottom: 0;
+      top: 50%; /* Centrado vertical */
+      transform: translateY(-50%); /* Centrado vertical preciso */
       display: flex;
       align-items: center;
       z-index: 10;
+      height: auto; /* Altura automática */
       
       ion-button {
         color: white !important;
         --color: white !important;
-        height: 100%;
+        height: auto; /* Altura automática */
         margin: 0;
         --padding-start: 12px;
         --padding-end: 12px;
@@ -58,9 +65,15 @@
         right: 0;
       }
     }
+
+    .header-logo-container {
+      position: relative;
+      top: 0;
+      transform: none;
+    }
   }
 
-  /* Versión Web */
+  /* Versión Web (se mantiene igual) */
   .web-header {
     display: flex;
     justify-content: space-between;
@@ -111,7 +124,6 @@
         color: white !important;
       }
     }
-
   }
 }
 
@@ -123,6 +135,7 @@
 
   .safe-header {
     padding-top: 0px;
+    min-height: auto; /* Altura automática en web */
   }
 
   .custom-header {
@@ -137,10 +150,10 @@
   }
 
   .mobile-header {
-    padding-bottom: 35px;
+    padding-bottom: 0; /* Restauramos pero sin valor */
 
     .header-button {
-      padding-bottom: 35px;
+      padding-bottom: 0; /* Restauramos pero sin valor */
     }
   }
 }

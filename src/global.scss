@@ -34,5 +34,19 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import "@ionic/angular/css/palettes/dark.system.css";
+// @import "@ionic/angular/css/palettes/dark.system.css";
 
+// Deshabilitar detección de modo oscuro
+body {
+  color-scheme: light only;
+  
+  ion-content {
+    color: #000000 !important;
+  }
+  
+  ion-header, ion-footer, ion-toolbar, ion-item, ion-card {
+    --background: #ffffff;
+    background: #ffffff;
+    color: #000000;
+  }
+}

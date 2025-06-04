@@ -4,6 +4,7 @@ import { PlanService } from 'src/app/services/plan.service';
 import { Plan } from 'src/app/models/plan.model';
 import { Task } from 'src/app/models/task.model';
 import { TaskService } from 'src/app/services/task.service';
+import { PlanValidationService } from 'src/app/services/plan-validation.service';
 
 @Component({
   selector: 'app-update-plan',
@@ -23,19 +24,19 @@ export class UpdatePlanPage implements OnInit {
   }; // Plan que estamos editando
 
   userTasks: Task[] = []; // Tareas disponibles para asignar
+  validationErrors: { title?: string } = {};
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private planService: PlanService,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private validationService: PlanValidationService
   ) {}
 
   ngOnInit() {
     const planId = this.route.snapshot.paramMap.get('id');
     if (planId) {
-
-       // Cargamos el plan a editar
       this.planService.getPlanById(planId).subscribe({
         next: (plan) => {
           this.plan = {
@@ -53,10 +54,12 @@ export class UpdatePlanPage implements OnInit {
     });
   }
 
-  // Actualiza el plan en el servidor
   updatePlan() {
-    if (this.plan.id) {
+    // Validar los datos
+    const validation = this.validationService.validatePlan(this.plan);
+    this.validationErrors = validation.errors;
 
+    if (validation.valid && this.plan.id) {
       // Preparamos los datos actualizados
       const planToUpdate: Plan = {
         ...this.plan,
@@ -65,8 +68,6 @@ export class UpdatePlanPage implements OnInit {
 
       // Enviamos al backend
       this.planService.updatePlan(this.plan.id, planToUpdate).subscribe({
-
-        // Volvemos a la lista con flag de actualización
         next: () => this.router.navigate(['/plans'], {
           state: { refresh: true }
         }),

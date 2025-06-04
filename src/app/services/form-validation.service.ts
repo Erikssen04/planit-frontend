@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 @Injectable({ providedIn: 'root' })
 export class FormValidationService {
 
-    validateUsername(username: string): boolean {
-        return username.trim().length >= 3;
-    }
+  validateUsername(username: string): boolean {
+    return username.trim().length >= 3;
+  }
 
   validateEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

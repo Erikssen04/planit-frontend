@@ -11,6 +11,10 @@
       <ion-item class="rounded-item" fill="outline">
         <ion-input [(ngModel)]="plan.title" required></ion-input>
       </ion-item>
+      <!-- Mostrar error de título -->
+      <div *ngIf="validationErrors.title" class="error-message">
+        {{ validationErrors.title }}
+      </div>
     </div>
 
     <div class="input-container">

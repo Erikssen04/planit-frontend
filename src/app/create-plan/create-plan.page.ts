@@ -4,6 +4,8 @@ import { Plan } from 'src/app/models/plan.model';
 import { PlanService } from 'src/app/services/plan.service';
 import { Task } from 'src/app/models/task.model';
 import { TaskService } from 'src/app/services/task.service';
+import { PlanValidationService } from 'src/app/services/plan-validation.service';
+
 
 @Component({
   selector: 'app-create-plan',
@@ -22,11 +24,15 @@ export class CreatePlanPage implements OnInit {
   };
 
   userTasks: Task[] = [];
+  validationErrors: { title?: string } = {};
+
 
   constructor(
     private planService: PlanService,
     private taskService: TaskService,
-    private router: Router
+    private router: Router,
+    private validationService: PlanValidationService
+
   ) {}
 
   // Al entrar se obtiene la lista de tareas
@@ -39,11 +45,17 @@ export class CreatePlanPage implements OnInit {
 
   // Crear plan y refrescarlo en plans directamente
   createPlan() {
-    this.planService.createPlan(this.plan).subscribe({
-      next: () => this.router.navigate(['/plans'], {
-        state: { refresh: true }
-      }),
-      error: (err) => console.error('Error creando plan', err)
-    });
+    const validation = this.validationService.validatePlan(this.plan);
+    this.validationErrors = validation.errors;
+
+    
+    if (validation.valid) {
+      this.planService.createPlan(this.plan).subscribe({
+        next: () => this.router.navigate(['/plans'], {
+          state: { refresh: true }
+        }),
+        error: (err) => console.error('Error creando plan', err)
+      });
+    }
   }
 }

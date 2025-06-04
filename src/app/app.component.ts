@@ -11,6 +11,9 @@ export class AppComponent implements OnInit {
   constructor(private platform: Platform) {}
 
   ngOnInit() {
+    document.body.classList.remove('dark');
+    document.documentElement.classList.remove('dark');
+
     this.platform.ready().then(() => {
 
       // Ajuste automático para moviles con notch

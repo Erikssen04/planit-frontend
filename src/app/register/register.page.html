@@ -56,15 +56,17 @@
           name="password"
           [(ngModel)]="password"
           required
-          minlength="8"
+          minlength="6"
           #passwordInput="ngModel"
           [class.invalid]="passwordInput.invalid && passwordInput.touched"
         ></ion-input>
-
-        
+        <!-- Botón para mostrar/ocultar contraseña -->
+        <ion-button fill="clear" slot="end" (click)="passwordVisibility.password1 = !passwordVisibility.password1">
+          <ion-icon [name]="passwordVisibility.password1 ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+        </ion-button>
       </ion-item>
       <ion-note *ngIf="passwordInput.invalid && passwordInput.touched" color="danger">
-        Incluye al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial.
+        Debe tener al menos 6 caracteres, una mayúscula, una minúscula y un símbolo
       </ion-note>
     </div>
 
@@ -78,12 +80,14 @@
           name="confirmPassword"
           [(ngModel)]="confirmPassword"
           required
-          minlength="8"
+          minlength="6"
           #confirmPasswordInput="ngModel"
           [class.invalid]="confirmPasswordInput.invalid && confirmPasswordInput.touched"
         ></ion-input>
-
-        
+        <!-- Botón para mostrar/ocultar contraseña -->
+        <ion-button fill="clear" slot="end" (click)="passwordVisibility.password2 = !passwordVisibility.password2">
+          <ion-icon [name]="passwordVisibility.password2 ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+        </ion-button>
       </ion-item>
       <ion-note *ngIf="confirmPasswordInput.invalid && confirmPasswordInput.touched" color="danger">
         Repite la contraseña
@@ -99,7 +103,6 @@
     >
       Crear cuenta
     </ion-button>
-
   </form>
 
   <!-- Enlace al login -->
@@ -115,5 +118,4 @@
       Iniciar sesión
     </ion-button>
   </div>
-
 </ion-content>

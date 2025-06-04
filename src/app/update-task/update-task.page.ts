@@ -4,6 +4,7 @@ import { TaskService } from '../services/task.service';
 import { Task } from '../models/task.model';
 import { Plan } from '../models/plan.model';
 import { PlanService } from '../services/plan.service';
+import { TaskValidationService } from '../services/task-validation.service';
 
 @Component({
   selector: 'app-update-task',
@@ -24,12 +25,14 @@ export class UpdateTaskPage implements OnInit {
   }; // Tarea que estamos editando
 
   userPlans: Plan[] = []; // Planes disponibles para asignar
+  validationErrors: { title?: string, priority?: string } = {}; // Variable para errores
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private taskService: TaskService,
-    private planService: PlanService
+    private planService: PlanService,
+    private validationService: TaskValidationService
   ) {}
 
   ngOnInit() {
@@ -57,9 +60,14 @@ export class UpdateTaskPage implements OnInit {
   }
 
   // Actualiza la tarea en el servidor
+  
   updateTask() {
-    if (this.task.id) {
-    
+    // Validamos los datos
+    const validation = this.validationService.validateTask(this.task);
+    this.validationErrors = validation.errors;
+
+    if (validation.valid && this.task.id) {
+
       // Preparamos los datos actualizados
       const taskToUpdate: Task = {
         ...this.task,

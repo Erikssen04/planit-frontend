@@ -11,6 +11,10 @@
       <ion-item class="rounded-item" fill="outline">
         <ion-input [(ngModel)]="task.title" required></ion-input>
       </ion-item>
+      <!-- Mostrar error de título -->
+      <div *ngIf="validationErrors.title" class="error-message">
+        {{ validationErrors.title }}
+      </div>
     </div>
 
     <div class="input-container">
@@ -40,7 +44,12 @@
           <ion-select-option value="baja">Baja</ion-select-option>
         </ion-select>
       </ion-item>
+      <!-- Mostrar error de prioridad -->
+      <div *ngIf="validationErrors.priority" class="error-message">
+        {{ validationErrors.priority }}
+      </div>
     </div>
+
     <div class="input-container">
       <label class="input-label">Asignar a Plan</label>
       <ion-item class="rounded-item" fill="outline">
