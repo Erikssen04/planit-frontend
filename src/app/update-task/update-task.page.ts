@@ -60,8 +60,8 @@ export class UpdateTaskPage implements OnInit {
   }
 
   // Actualiza la tarea en el servidor
-  
   updateTask() {
+    
     // Validamos los datos
     const validation = this.validationService.validateTask(this.task);
     this.validationErrors = validation.errors;

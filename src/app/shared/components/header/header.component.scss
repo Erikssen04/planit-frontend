@@ -1,19 +1,19 @@
 .safe-header {
   padding-top: var(--ion-safe-area-top);
   background: #0baeff !important;
-  display: flex; /* Añadido para centrado vertical */
-  align-items: center; /* Centra verticalmente el contenido */
-  min-height: calc(60px + var(--ion-safe-area-top)); /* Altura mínima */
+  display: flex; 
+  align-items: center; 
+  min-height: calc(60px + var(--ion-safe-area-top));
 }
 
 .custom-header {
   --background: #0baeff !important;
   height: 60px;
   position: relative;
-  width: 100%; /* Ocupa todo el ancho */
-  display: flex; /* Añadido para centrado vertical */
-  align-items: center; /* Centra verticalmente el contenido */
-  margin-top: 0; /* Eliminado el margen superior */
+  width: 100%; 
+  display: flex; 
+  align-items: center; 
+  margin-top: 0;
 
   .header-logo-container, .logo-section {
     display: flex;
@@ -37,17 +37,17 @@
     
     .header-button {
       position: absolute;
-      top: 50%; /* Centrado vertical */
-      transform: translateY(-50%); /* Centrado vertical preciso */
+      top: 50%;
+      transform: translateY(-50%); 
       display: flex;
       align-items: center;
       z-index: 10;
-      height: auto; /* Altura automática */
+      height: auto; 
       
       ion-button {
         color: white !important;
         --color: white !important;
-        height: auto; /* Altura automática */
+        height: auto;
         margin: 0;
         --padding-start: 12px;
         --padding-end: 12px;
@@ -73,7 +73,7 @@
     }
   }
 
-  /* Versión Web (se mantiene igual) */
+  /* Versión Web */
   .web-header {
     display: flex;
     justify-content: space-between;
@@ -135,7 +135,7 @@
 
   .safe-header {
     padding-top: 0px;
-    min-height: auto; /* Altura automática en web */
+    min-height: auto;
   }
 
   .custom-header {
@@ -150,10 +150,10 @@
   }
 
   .mobile-header {
-    padding-bottom: 0; /* Restauramos pero sin valor */
+    padding-bottom: 0; 
 
     .header-button {
-      padding-bottom: 0; /* Restauramos pero sin valor */
+      padding-bottom: 0;
     }
   }
 }

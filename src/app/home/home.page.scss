@@ -125,15 +125,19 @@ ion-list {
 
 ion-item {
   --background: rgba(255, 255, 255, 0.95);
-  --border-radius: 18px;
-  --padding-start: 12px;
-  --padding-end: 12px;
-  margin-bottom: 12px;
-  box-shadow: 2px 4px 6px rgba(0,0,0,0.05);
+  border-radius: 18px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  margin-bottom: 16px;
+  border: 2px solid rgba(11, 174, 255, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
   transition: all 0.3s ease;
 
   &:hover {
     transform: translateY(-2px);
+    border-color: #0baeff;
+    box-shadow: 0 4px 12px rgba(11, 174, 255, 0.15);
   }
 
   ion-checkbox {

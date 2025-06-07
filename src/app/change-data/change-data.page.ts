@@ -3,7 +3,7 @@ import { getAuth, reauthenticateWithCredential, EmailAuthProvider, updatePasswor
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
-import { UserService } from '../services/user.service'; // Asumiendo que tenemos un servicio para usuarios
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-change-data',

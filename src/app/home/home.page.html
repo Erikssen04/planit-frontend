@@ -2,7 +2,7 @@
 
 <ion-content class="ion-padding">
   <div class="home-layout">
-    <!-- Panel izquierdo: filtros -->
+   
     <div class="controls-section">
       <h1>Mis Tareas</h1>
 
@@ -35,9 +35,10 @@
       </ion-item>
     </div>
 
-    <!-- Panel derecho: lista de tareas -->
+    <!-- lista de tareas -->
     <div class="task-list-section">
       <ion-list>
+
         <!-- Estado vacío -->
         <div *ngIf="filteredTasks.length === 0" class="empty-state">
           <ion-icon name="checkmark-done-outline" class="empty-icon"></ion-icon>
@@ -81,7 +82,7 @@
     </div>
   </div>
 
-  <!-- Botón flotante -->
+  <!-- Botón para crear tarea -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="custom-fab">
     <ion-fab-button (click)="goToCreateTask()">
       <ion-icon name="add-outline"></ion-icon>

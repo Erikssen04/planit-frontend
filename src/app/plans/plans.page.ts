@@ -128,13 +128,19 @@ export class PlansPage implements OnInit {
     switch(this.selectedDateFilter) {
       case 'today':
         return this.isSameDate(planDate, today);
+
       case 'tomorrow':
         const tomorrow = new Date(today);
         tomorrow.setDate(tomorrow.getDate() + 1);
+
         return this.isSameDate(planDate, tomorrow);
+
       case 'week':
+
         return this.isInCurrentWeek(planDate, today);
+
       default:
+
         return true;
     }
   }
@@ -143,9 +149,11 @@ export class PlansPage implements OnInit {
     return date1.getFullYear() === date2.getFullYear() &&
            date1.getMonth() === date2.getMonth() &&
            date1.getDate() === date2.getDate();
+           
   }
 
   private isInCurrentWeek(date: Date, referenceDate: Date): boolean {
+
     const startOfWeek = new Date(referenceDate);
     startOfWeek.setDate(startOfWeek.getDate() - ((startOfWeek.getDay() + 6) % 7));
     startOfWeek.setHours(0, 0, 0, 0);
