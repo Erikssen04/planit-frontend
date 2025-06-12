@@ -21,6 +21,8 @@ export class RegisterPage {
     password1: false,
     password2: false
   };
+  isPasswordValid = false;
+  emailAlreadyRegistered = false;
 
   private auth;
 
@@ -37,6 +39,10 @@ export class RegisterPage {
     this.passwordVisibility[field] = !this.passwordVisibility[field];
   }
 
+  onPasswordChange() {
+  this.isPasswordValid = this.formValidation.validatePassword(this.password);
+}
+
    // Valida si el formulario es correcto
   isFormValid(): boolean {
     return (
@@ -47,24 +53,28 @@ export class RegisterPage {
     );
   }
 
-  // Registrar nuevo usuario
   register() {
+    this.emailAlreadyRegistered = false; // Resetear antes de intentar registro
+
     if (!this.isFormValid()) {
       alert('Revisa los campos antes de continuar');
       return;
     }
 
-    // Usamos el auth.service, o servicio de autenticación.
     this.authService.register(this.email, this.password, this.username)
     .then(() => {
       alert('Cuenta creada con éxito');
       this.router.navigateByUrl('/login');
     })
     .catch((error: any) => {
-      alert('Error: ' + error.message);
+      if (error.code === 'auth/email-already-in-use') {
+        this.emailAlreadyRegistered = true;
+      } else {
+        alert('Error: ' + error.message);
+      }
     });
-
   }
+
 
   goBack() {
     this.router.navigateByUrl('/login');

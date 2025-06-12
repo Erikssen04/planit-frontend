@@ -24,6 +24,11 @@
       <ion-note *ngIf="emailInput.invalid && emailInput.touched" color="danger">
         Email no válido
       </ion-note>
+      <!-- Mensaje de error si los datos ingresados no son válidos-->
+      <ion-note *ngIf="loginErrorMessage" color="danger" class="ion-text-center" style="margin-bottom: 15px;">
+        {{ loginErrorMessage }}
+      </ion-note>
+
     </div>
 
     <!-- Contraseña -->

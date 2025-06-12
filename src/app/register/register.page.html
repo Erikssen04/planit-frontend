@@ -27,24 +27,28 @@
     </div>
 
     <!-- Email -->
-    <div class="input-container">
-      <label for="email" class="input-label">Correo electrónico</label>
-      <ion-item class="rounded-item" fill="outline">
-        <ion-input
-          id="email"
-          type="email"
-          name="email"
-          [(ngModel)]="email"
-          required
-          email
-          #emailInput="ngModel"
-          [class.invalid]="emailInput.invalid && emailInput.touched"
-        ></ion-input>
-      </ion-item>
-      <ion-note *ngIf="emailInput.invalid && emailInput.touched" color="danger">
-        Email no válido
-      </ion-note>
-    </div>
+  <div class="input-container">
+    <label for="email" class="input-label">Correo electrónico</label>
+    <ion-item class="rounded-item" fill="outline">
+      <ion-input
+        id="email"
+        type="email"
+        name="email"
+        [(ngModel)]="email"
+        required
+        email
+        #emailInput="ngModel"
+        [class.invalid]="(emailInput.invalid && emailInput.touched) || emailAlreadyRegistered"
+      ></ion-input>
+    </ion-item>
+    <ion-note *ngIf="emailInput.invalid && emailInput.touched" color="danger">
+      Email no válido
+    </ion-note>
+    <ion-note *ngIf="emailAlreadyRegistered" color="danger">
+      Ya existe un usuario con ese correo electrónico
+    </ion-note>
+  </div>
+
 
     <!-- Contraseña -->
     <div class="input-container">
@@ -55,6 +59,7 @@
           [type]="passwordVisibility.password1 ? 'text' : 'password'"
           name="password"
           [(ngModel)]="password"
+          (ngModelChange)="onPasswordChange()"
           required
           minlength="6"
           #passwordInput="ngModel"
@@ -65,8 +70,8 @@
           <ion-icon [name]="passwordVisibility.password1 ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
         </ion-button>
       </ion-item>
-      <ion-note *ngIf="passwordInput.invalid && passwordInput.touched" color="danger">
-        Debe tener al menos 6 caracteres, una mayúscula, una minúscula y un símbolo
+      <ion-note *ngIf="password.length > 0 && !isPasswordValid" color="danger">
+        Incluye al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial.
       </ion-note>
     </div>
 

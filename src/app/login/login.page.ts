@@ -16,6 +16,7 @@ export class LoginPage {
   password = '';
   isPasswordVisible = false;
   isLoading = false;
+  loginErrorMessage: string | null = null; 
 
   constructor(private router: Router, private alertController: AlertController) {}
 
@@ -24,6 +25,7 @@ export class LoginPage {
     if (!this.email || !this.password) return;
 
     this.isLoading = true;
+    this.loginErrorMessage = null;
 
     try {
 
@@ -39,7 +41,14 @@ export class LoginPage {
 
       this.router.navigateByUrl('/home');
     } catch (error: any) {
-      alert('Error al iniciar sesión: ' + error.message);
+      if (
+        error.code === 'auth/wrong-password' || 
+        error.code === 'auth/user-not-found'
+      ) {
+        this.loginErrorMessage = 'Datos no válidos';
+      } else {
+        this.loginErrorMessage = 'Error al iniciar sesión: Datos no válidos';
+      }
     } finally {
       this.isLoading = false;
     }

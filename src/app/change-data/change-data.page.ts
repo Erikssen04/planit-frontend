@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
+import { FormValidationService } from '../services/form-validation.service';
+
 
 @Component({
   selector: 'app-change-data',
@@ -20,12 +22,14 @@ export class ChangeDataPage implements OnInit {
   showNewPassword: boolean = false;
   showConfirmNewPassword: boolean = false;
   currentUser: User | null = null;
+  isNewPasswordValid: boolean = true;
 
   constructor(
     private authService: AuthService,
     private userService: UserService,
     private router: Router,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private formValidationService: FormValidationService
   ) { }
 
   ngOnInit() {
@@ -34,6 +38,11 @@ export class ChangeDataPage implements OnInit {
     if (this.currentUser) {
       this.username = this.currentUser.displayName || '';
     }
+    this.isNewPasswordValid = true;
+  }
+
+  onNewPasswordChange() {
+    this.isNewPasswordValid = this.formValidationService.validatePassword(this.newPassword);
   }
 
   async updateData() {
@@ -56,7 +65,18 @@ export class ChangeDataPage implements OnInit {
       // Actualizar la contraseña si se proporcionó una nueva
       if (this.newPassword) {
         await updatePassword(this.currentUser, this.newPassword);
+        
+        // Obtener NUEVA instancia del usuario
+        const auth = getAuth();
+        this.currentUser = auth.currentUser;
+        
+        if (this.currentUser) {
+          await this.currentUser.getIdToken(true);
+        } else {
+          throw new Error('No se pudo obtener el usuario después de actualizar la contraseña');
+        }
       }
+
 
       // Actualizar el nombre de usuario en Firebase y en el bckend
       if (this.username !== this.currentUser.displayName) {
